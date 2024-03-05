@@ -45,6 +45,9 @@ def run_discord_bot() :
         username = str(message.author.mention)
         user_message = str(message.content)
 
+        if '?agents' in user_message :
+            await send_message(message, user_message)
+
         if '?agencies' in user_message :
             await send_message(message, user_message)
 

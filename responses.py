@@ -1,6 +1,36 @@
-from website_related_functionnalities import agency_finder, property_calculator, author_finder
+from website_related_functionnalities import agent_finder,agency_finder, property_calculator, author_finder
 
 def hanle_response (message) -> str :
+
+    if message == '?agents today' :
+        agents = agent_finder.find_agent_today()
+        n_agents = len(agents)
+
+        if n_agents == 0 :
+            return '@everyone no agents have subscribed today'
+
+        else :
+            return f'@everyone {n_agents} agents have subscribed today\n{'\n'.join(agents)}'
+
+    elif message == '?agents yesterday' :
+        agents = agent_finder.find_agent_yesterday()
+        n_agents = len(agents)
+
+        if n_agents == 0 :
+            return '@everyone no agents have subscribed yesterday'
+
+        else :
+            return f'@everyone {n_agents} agents have subscribed yesterday\n{'\n'.join(agents)}'
+
+    elif message[:8] == '?agents ' :
+        agents = agent_finder.find_agent_by_date(message[8:])
+        n_agents = len(agents)
+
+        if n_agents == 0 :
+            return f'@everyone No agents have subscribed on {message[8:]}'
+
+        else :
+            return f'@everyone {n_agents} agents have subscribed on {message[8:]}\n{'\n'.join(agents)}'
 
     if message == '?agencies today' :
         agencies = agency_finder.find_agency_today()
